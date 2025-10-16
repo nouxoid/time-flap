@@ -28,7 +28,7 @@
         
         <!-- Dream service for charging screen saver -->
         <service
-            android:name=".DreamService"
+            android:name=".TimeFlapDreamService"
             android:exported="true"
             android:permission="android.permission.BIND_DREAM_SERVICE">
             <intent-filter>
