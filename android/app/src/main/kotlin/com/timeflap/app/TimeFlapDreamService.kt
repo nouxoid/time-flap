@@ -12,8 +12,8 @@ class TimeFlapDreamService : DreamService() {
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         
-        // Set the dream to be interactive
-        isInteractive = false
+        // Set the dream to be interactive so users can control timers
+        isInteractive = true
         isFullscreen = true
         
         // Initialize Flutter engine
@@ -22,12 +22,12 @@ class TimeFlapDreamService : DreamService() {
             DartExecutor.DartEntrypoint.createDefault()
         )
         
-        // Create and attach Flutter view
-        flutterView = FlutterView(this)
-        flutterView?.attachToFlutterEngine(flutterEngine!!)
-        
-        // Set the content view
-        setContentView(flutterView)
+        // Create and attach Flutter view safely
+        flutterEngine?.let { engine ->
+            flutterView = FlutterView(this)
+            flutterView?.attachToFlutterEngine(engine)
+            setContentView(flutterView)
+        }
     }
 
     override fun onDreamingStarted() {
